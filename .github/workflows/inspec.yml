@@ -41,7 +41,6 @@ jobs:
         winrm quickconfig
         Set-ExecutionPolicy AllSigned
         net start winrm
-        # $ID=aws cloudformation list-stack-resources --stack-name mystack --query StackResourceSummaries[1].[PhysicalResourceId] --output text
         $ID=aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=tag:Name,Values=New1" --query 'Reservations[*].Instances[*].[InstanceId]' --output text
         $ID
         $IP=aws --region ap-south-1 ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=instance-id,Values=$ID" --query 'Reservations[*].Instances[*].[PublicIpAddress]' --output text
