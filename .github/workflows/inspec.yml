@@ -42,8 +42,10 @@ jobs:
         $ID
         $IP=aws --region ap-south-1 ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=instance-id,Values=$ID" --query 'Reservations[*].Instances[*].[PublicIpAddress]' --output text
         $IP
-        $username = "Administrator"
-        $password = "Password#1"
+        sleep 20
         $env:Path += ';C:\opscode\inspec\bin\'
         inspec --chef-license=accept
-        inspec exec .\test2.rb -t winrm://$username@$IP --password $password
+        inspec exec .\test2.rb -t winrm://${{ secrets.USERNAME }}@$IP --password ${{ secrets.PASS }}
+        $SECURE="Using https 5986"
+        $SECURE
+        inspec exec .\test2.rb --host $IP --user ${{ secrets.USERNAME }} --password ${{ secrets.PASS }} --backend winrm --ssl --self-signed
