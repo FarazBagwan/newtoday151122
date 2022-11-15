@@ -37,9 +37,6 @@ jobs:
 
     - name: Run tests
       run: |
-        Enable-PSRemoting -Confirm:$false
-        winrm quickconfig
-        Set-ExecutionPolicy AllSigned
         net start winrm
         $ID=aws ec2 describe-instances --filters "Name=instance-state-name,Values=running" "Name=tag:Name,Values=New1" --query 'Reservations[*].Instances[*].[InstanceId]' --output text
         $ID
