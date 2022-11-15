@@ -46,6 +46,7 @@ jobs:
         $env:Path += ';C:\opscode\inspec\bin\'
         inspec --chef-license=accept
         inspec exec .\test2.rb -t winrm://${{ secrets.USERNAME }}@$IP --password ${{ secrets.PASS }}
-        $SECURE="Using https 5986"
-        $SECURE
+        $SEC="Using https 5986"
+        $SEC
         inspec exec .\test2.rb --host $IP --user ${{ secrets.USERNAME }} --password ${{ secrets.PASS }} --backend winrm --ssl --self-signed
+ 
